@@ -10,16 +10,13 @@ namespace App\Constants;
         const DYNAMIC_TABLES="dynamic_tables";
         const REG_STU="admitted_students";
         
-    
         const FORMS=array("Science","Commercial","Art",NULL);
 
-        
         const SENIOR_CLASS=array("ss1","ss2","ss3");
         const JUNIOR_CLASS=array("jss1","jss2","jss3");
         const NURSERY_CLASS = array('kg_2','nursery_1','nursery_2','nursery_3');
         const PRIMARY_CLASS = array('primary_1','primary_2','primary_3','primary_4','primary_5');
         
-
         const NURSERY_KG_NAMES=array(
             "bible_knowledge"=>"Bible Knowledge", 
             "creative_arts"=>"Creative Arts", 
@@ -100,12 +97,8 @@ namespace App\Constants;
             'physics'=>'PHYSICS',
             'technical_drawing'=>'TECHNICAL DRAWING'
         );
-
-       
-
         
         const BEHAVIOUR_ITEM= array('attentiveness_in_class','handling_of_tools','handwriting','helping_others','honesty','managing_school_properties','neatness','obedience','sense_of_responsibility','punctuality','r_with_students','initiative','organizational_ability');
-
 
         const BEHAVIOUR_DICT=array(
            'attentiveness_in_class'=>'Attentiveness in class',

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Constants\AppConstants;
+use App\Models\ResultPin;
 use App\Models\SchoolConfiguration;
 use App\Models\Student;
 use App\Models\StudentBehaviourRecord;
@@ -42,7 +43,6 @@ class ResultController extends Controller
         //CHECK PIN
 
 
-
         if ($resultType == "termly") {
             $studentCaEntries =  StudentCaRecord::where("student_id", $student_id)
                 ->where("class", $class)
@@ -56,6 +56,45 @@ class ResultController extends Controller
                 ->where("term", $term)
                 ->first();
         }
+    }
+
+    public function verifyPin($term, $session, $pin, $student_id){
+        $pin_exists = ResultPin::where("pin", $pin)->exists();
+        if(!$pin_exists){
+            return [
+                "staus"=>false,
+                "msg"=>"Invalid Pin"
+                
+            ];
+        }
+
+        $pin_data = ResultPin::where("pin", $pin)->first();
+        if($pin_data->status==1){
+            if($pin_data->used_by!=$student_id){
+                return [
+                    "staus"=>false,
+                    "msg"=>"This pin has been used for another student"
+                ];
+            }
+            if($pin_data->term == $term && $pin_data->session == $session){
+                return [
+                    "staus"=>true,
+                    "msg"=>"Available of current Student"
+                ];
+            }
+        }
+        if($pin_data->status ==0){
+            return [
+                "staus"=>true,
+                "msg"=>"Available of usage. Not tied to any student"
+            ];
+        }
+
+        return [
+            "staus"=>false,
+            "msg"=>"An Error occured while processing the requests
+            "
+        ];
     }
 
 

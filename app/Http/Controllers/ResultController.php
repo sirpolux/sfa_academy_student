@@ -42,7 +42,13 @@ class ResultController extends Controller
         $student_id = $request->student_id;
         //CHECK PIN
 
+        $pin_term = $resultType=="annual"?"third":$term;
 
+        $pin_status = $this->verifyPin($pin_term, $session, $pin, $student_id);
+
+        if($pin_status['status']==false){
+            return redirect()->route('result.index')->withErrors($pin_status);
+        }
         if ($resultType == "termly") {
             $studentCaEntries =  StudentCaRecord::where("student_id", $student_id)
                 ->where("class", $class)

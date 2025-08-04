@@ -8,6 +8,7 @@ use App\Models\SchoolConfiguration;
 use App\Models\Student;
 use App\Models\StudentBehaviourRecord;
 use App\Models\StudentCaRecord;
+use App\Models\SubjectSummaryAveHighestLowest;
 use Illuminate\Http\Request;
 
 class ResultController extends Controller
@@ -56,12 +57,20 @@ class ResultController extends Controller
                 ->where("term", $term);
             $studentData = Student::find($student_id);
             $schoolConfig = SchoolConfiguration::find(1);
-            $student_behaviour = StudentBehaviourRecord::where("student_id", $student_id)
+            $studentBehaviour = StudentBehaviourRecord::where("student_id", $student_id)
                 ->where("class", $class)
                 ->where("session", $session)
                 ->where("term", $term)
                 ->first();
+
+            $subjectHighestLowest = SubjectSummaryAveHighestLowest::where('class',$class)
+                ->where('term', $term)
+                ->where('session', $session)
+                ->select('subject', 'form', 'subj_ave', 'subj_total', 'highest_score','lowest_score', 'total_students')
+                ->get()
+            ;
         }
+
     }
 
     public function verifyPin($term, $session, $pin, $student_id){

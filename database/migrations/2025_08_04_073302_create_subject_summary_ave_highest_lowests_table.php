@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('resumption_closing_dates', function (Blueprint $table) {
+        Schema::create('subject_summary_ave_highest_lowests', function (Blueprint $table) {
             $table->id();
-            $table->string("session")->nullable();
-            $table->string("term")->nullable();
-            $table->string("closing_date");
-            $table->string("resumption_date");
-            $table->integer("days_in_term");
             $table->timestamps();
         });
     }
@@ -27,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('resumption_closing_dates');
+        Schema::dropIfExists('subject_summary_ave_highest_lowests');
     }
 };

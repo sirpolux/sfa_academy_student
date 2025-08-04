@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('resumption_closing_dates', function (Blueprint $table) {
             $table->id();
-            $table->string("session")->nullable();
+            $table->string("session")->nullable();   //closing_date, resumption_date, days_in_term
             $table->string("term")->nullable();
             $table->string("closing_date");
             $table->string("resumption_date");
             $table->integer("days_in_term");
+            $table->foreignId("captured_by");
             $table->timestamps();
         });
     }

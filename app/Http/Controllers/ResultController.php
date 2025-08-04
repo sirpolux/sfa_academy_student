@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Constants\AppConstants;
 use App\Models\ResultPin;
+use App\Models\ResumptionClosingDates;
 use App\Models\SchoolConfiguration;
+use App\Models\SessionSummary;
 use App\Models\Student;
 use App\Models\StudentBehaviourRecord;
 use App\Models\StudentCaRecord;
+use App\Models\SubjectSummary;
 use App\Models\SubjectSummaryAveHighestLowest;
 use Illuminate\Http\Request;
 
@@ -67,8 +70,26 @@ class ResultController extends Controller
                 ->where('term', $term)
                 ->where('session', $session)
                 ->select('subject', 'form', 'subj_ave', 'subj_total', 'highest_score','lowest_score', 'total_students')
-                ->get()
-            ;
+                ->get();
+
+            $resumptionDateData =  ResumptionClosingDates::where("session", $session)
+            ->where("term", $term)
+            ->select("closing_date", 'resumption_date', "days_in_term")
+            ->first();
+        }
+
+        if($resultType == "session"){
+            $subjectRecored = SubjectSummary::where("student_id", $student_id)  //this is for part term might not provide the expected output
+            ->where("term", $term)
+            ->where("session", $session)
+            ->where("class", $class)
+            ->select("")
+            ->get();
+
+            $sessionSummary = SessionSummary::where("student_id", $student_id)
+            ->where("session", $session)
+            ->where("class", $class)
+            ->get();
         }
 
     }

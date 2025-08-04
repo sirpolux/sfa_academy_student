@@ -13,6 +13,21 @@ return new class extends Migration
     {
         Schema::create('session_summaries', function (Blueprint $table) {
             $table->id();
+            $table->string('student_id');
+            $table->string('class');
+            $table->string('session');
+            $table->string('subject');
+            $table->string('form');
+            $table->double('first')->nullable()->default(0);
+            $table->double('second')->nullable()->default(0);
+            $table->double('third')->nullable()->default(0);
+            $table->double('total')->nullable()->default(0);
+            $table->double('average')->nullable()->default(0);
+            $table->string('grade')->nullable();
+            $table->string('remark')->nullable();
+            $table->string("position")->nullable();
+            $table->string('captured_by')->nullable();
+            $table->string('updated_by')->nullable();
             $table->timestamps();
         });
     }

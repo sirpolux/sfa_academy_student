@@ -24,9 +24,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::get("/student/result", [ResultController::class, 'resultIndex'])->name('result.index');
+
+Route::get("/student/termly/result/index", [ResultController::class, 'resultIndexTermly'])->name('result.termly.index');
+Route::get("/student/annual/result/index", [ResultController::class, 'resultIndexAnnual'])->name('result.termly.index');
+
+
 Route::post("/student/result", [ResultController::class, 'fetchStudentResult'])->name('student.result.fetch');
-Route::get("/student/result/terml", [ResultController::class, 'termlyResult'])->name('student.termly.result');
-Route::get("/student/result/annual", [ResultController::class, 'annualResuly'])->name('student.annual.result');
+Route::get("/student/result/termly", [ResultController::class, 'termlyResult'])->name('student.termly.result');
+Route::get("/student/result/annual", [ResultController::class, 'annualResult'])->name('student.annual.result');
 
 require __DIR__.'/auth.php';

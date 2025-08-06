@@ -6,6 +6,7 @@ use App\Constants\AppConstants;
 use App\Models\AnnualReport;
 use App\Models\AnnualReportTable;
 use App\Models\ResultPin;
+use App\Models\ResumptionClosingDateData;
 use App\Models\ResumptionClosingDates;
 use App\Models\SchoolConfiguration;
 use App\Models\SessionSummary;
@@ -61,7 +62,6 @@ class ResultController extends Controller
             $studentList = Student::where("current_class", $class)
                 ->where("status", "active")
                 ->get();
-            
         }
     }
 
@@ -90,6 +90,17 @@ class ResultController extends Controller
                     ->withErrors(['pin' => $pin_status['pin']])
                     ->withInput(); // Optional: retains form input
             }
+            if ($resultType == "annual") {
+                //dd($request->all());
+                //dd("I am stucked here");
+                return redirect()
+                    ->route('result.annual.index')
+                    ->withErrors(['pin' => $pin_status['pin']])
+                    ->withInput(); // Optional: retains form input
+            }
+
+        }else{
+            $this->updatePinUsage($pin_term, $session, $pin, $student_id);
         }
         
  
@@ -139,9 +150,13 @@ class ResultController extends Controller
             ->where("term", $term)
             ->first();
 
-            $resumptionDateData = ResumptionClosingDates::where('session', $session)
+            $resumptionDateData = ResumptionClosingDateData::where('session', $session)
             ->where('term', $term)
             ->first();
+
+     
+
+            
 
             // $resumptionDateData =  ResumptionClosingDates::where("session", $session)
             // ->where("term", $term)
@@ -162,12 +177,7 @@ class ResultController extends Controller
         }
 
         if($resultType == "annual"){
-            // $subjectRecored = SubjectSummary::where("student_id", $student_id)  //this is for part term might not provide the expected output
-            // ->where("term", $term)
-            // ->where("session", $session)
-            // ->where("class", $class)
-            // ->select("")
-            // ->get();
+    
 
             $sessionSummary = SessionSummary::where("student_id", $student_id)
             ->where("session", $session)
@@ -195,6 +205,15 @@ class ResultController extends Controller
     }
 
    
+    public function updatePinUsage($term, $session, $pin, $student_id){
+       $pin = UniquePin::where('pin', $pin)->first();
+       $pin->status ="used";
+       $pin->session = $session;
+       $pin->term = $term;
+       $pin->used_by = $student_id;
+       $pin->save();
+
+    }
     public function verifyPin($term, $session, $pin, $student_id){
         $pin_exists =UniquePin::where("pin", $pin)->exists();
         if(!$pin_exists){

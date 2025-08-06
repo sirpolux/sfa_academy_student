@@ -114,7 +114,7 @@ export default function Welcome() {
            Get Started
          </a>
        </motion.section>
-       <Footer/>
+   
      </div>
     </GuestLayout>
   );

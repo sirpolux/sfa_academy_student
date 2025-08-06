@@ -10,7 +10,8 @@ export default function TermlyResult({ resultData }) {
         subjectDictionary,
         schoolConfig,
         resultRequestData,
-        studentClassSummary
+        studentClassSummary,
+        resumptionDataData
     } = resultData;
 
     const totalStudents =
@@ -97,7 +98,7 @@ export default function TermlyResult({ resultData }) {
             <div className="text-sm font-semibold" id="biodata">
                 <table style={{ width: "70%" }}>
                     <tbody>
-                        <tr  className="text-[1rem]">
+                        <tr className="text-[1rem]">
                             <td className="font-bold">Name:</td>
                             <td colSpan="3">{studentData.fullname}</td>
                         </tr>
@@ -147,6 +148,13 @@ export default function TermlyResult({ resultData }) {
             <div id="termDetails">
                 <table>
                     <tbody>
+                        <tr className="text-[0.6rem] font-semibold">
+                            <td>Closing Date: {resumptionDataData.closing_date} </td>
+                        </tr>
+                        <tr>
+                            <td>ResumptionDate: {resumptionDataData.next_resumption_date}</td>
+                        </tr>
+                   
                         <tr>
                             <td>Times Present:</td>
                             <td>{studentBehaviour.times_present}</td>
@@ -244,13 +252,13 @@ export default function TermlyResult({ resultData }) {
                                     typeof studentBehaviour[key] === "number" && key !== "id"
                             )
                             .map((itemKey, idx) => (
-                                (!(itemKey == "times_present" || itemKey =="times_absent"))&&
+                                (!(itemKey == "times_present" || itemKey == "times_absent")) &&
                                 <tr key={idx}>
                                     <td className="uppercase text-[0.80rem]">{itemKey.replace(/_/g, " ")}</td>
                                     {[5, 4, 3, 2, 1].map((score) => (
                                         <td key={score}>
                                             <input
-                                            className="text-[0.70rem]"
+                                                className="text-[0.70rem]"
                                                 type="radio"
                                                 checked={studentBehaviour[itemKey] === score}
                                                 readOnly
@@ -342,18 +350,18 @@ export default function TermlyResult({ resultData }) {
                             <td>V.GOOD</td>
                         </tr>
                         <tr>
-                        <td>3</td>
-                        <td>GOOD</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>FAIR</td>
-                    </tr>
-                    
-                    <tr>
-                        <td>1</td>
-                        <td>POOR</td>
-                    </tr>
+                            <td>3</td>
+                            <td>GOOD</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>FAIR</td>
+                        </tr>
+
+                        <tr>
+                            <td>1</td>
+                            <td>POOR</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

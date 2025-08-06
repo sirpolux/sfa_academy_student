@@ -26,11 +26,21 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get("/student/termly/result/index", [ResultController::class, 'resultIndexTermly'])->name('result.termly.index');
-Route::get("/student/annual/result/index", [ResultController::class, 'resultIndexAnnual'])->name('result.termly.index');
+Route::get("/student/annual/result/index", [ResultController::class, 'resultIndexAnnual'])->name('result.annual.index');
 
 
 Route::post("/student/result", [ResultController::class, 'fetchStudentResult'])->name('student.result.fetch');
 Route::get("/student/result/termly", [ResultController::class, 'termlyResult'])->name('student.termly.result');
 Route::get("/student/result/annual", [ResultController::class, 'annualResult'])->name('student.annual.result');
+
+
+Route::get("/contact-us", function(){
+    return inertia("ContactUs");
+})->name("contact");
+
+Route::get("/about-us", function(){
+    return inertia("AboutUs");
+})->name("about");
+
 
 require __DIR__.'/auth.php';

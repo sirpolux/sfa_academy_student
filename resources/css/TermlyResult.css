@@ -1,0 +1,237 @@
+*{
+    box-sizing:border-box;
+}
+
+body{
+background-image:url("img/sfa_back.png");
+background-repeat: no-repeat;
+background-position: center;
+background-size: 402px 457px;
+}
+
+#schoolLogo{
+width:3.1cm;
+height:3.2cm;
+position:absolute;
+top:2.3cm;
+left:17.7cm;
+}
+
+#skills table tr th{
+border:1px solid black;
+font-size:13px;
+font-weight:bold;
+margin:0;
+}
+#skills table tr td{
+border:1px solid black;
+
+}
+
+#studentPassport{
+position:absolute;
+width:3.2cm;
+height:3.2cm;
+border:1px solid grey;
+border-radius:5px;
+left:0.6cm;
+top:1.9cm;
+
+}
+#schooldata{
+    position:absolute;
+    width:29.5cm;
+    height:1.5cm;
+    float:left;
+    height:1.5cm;
+    left:0.5cm;
+    text-align:center;
+}
+
+.container{
+    position:relative;
+    padding:0.5cm;
+    /* width:33.7cm; */
+    height:22.5cm;
+}
+
+#biodata{
+    top:2.90cm;
+    position:absolute;
+    width:16cm;
+    height:3.5cm;
+    float:left;
+    border:none;
+    left:4.3cm;
+}
+#termDetails{
+    position:absolute;
+    width:9cm;
+    height:3.5cm;
+    left:24cm;
+    top:2cm;
+}
+#cTerm{
+    position:absolute;
+    width:9cm;
+    height:1cm;
+    left:24cm;
+    top:1.4cm;
+    font-weight: 700;
+}
+
+#termDetails table tr td{
+    font-size:14px;
+    font-weight:bold;
+    margin:2px;
+
+
+}
+#result{
+    position:absolute;
+    top:5.6cm;
+    width:23.53cm;
+    height:13.5cm;
+    float:left;
+    padding-right:2px;	
+}
+#result table tr td{
+border:1px solid black;
+font-size:15px;
+margin:0;
+padding-top:1px;
+padding-bottom:1px;
+padding-left:4px;
+padding-right:0px;
+}
+
+#table tr td{
+padding:1px;
+}
+
+#skills{
+    top:4.3cm;
+    position:absolute;
+    width:9cm;
+    height:12cm;
+    left:24.1cm;
+
+}
+#skills table tr td{
+    padding-left:4px;
+
+}
+
+
+#comment{
+    padding-top:5px;
+    position:absolute;
+    top:19.60cm;
+    width:22.5cm;
+    height:3cm;	
+}
+#comment table tr td{
+    font-size:15px;
+    font-weight:700;
+}
+
+#keys{
+    top:17.80cm;
+    position:absolute;
+    width:9cm;
+    height:3cm;
+    left:24.1cm;
+    padding:0;
+}
+#signature{
+    padding-top:5px;
+    position:absolute;
+    top:18.20cm;
+    width:8cm;
+    height:0.8cm;		
+    left:16cm;
+}
+.sig{
+    transform: 
+ rotate(-12deg);
+ font-size:20px;	
+}
+
+#resultKey{
+    top:14.20cm;
+    position:absolute;
+    width:8cm;
+    height:3cm;
+    left:24.1cm;
+    padding:0;
+    font-size:12px;
+}
+
+#resultKey table tr td{
+border:1px solid black;
+margin:0;
+padding-top:0px;
+padding-bottom:0px;
+padding-left:4px;
+padding-right:4px;
+}
+
+table, tr,td{
+margin:0px;
+padding:0px;
+
+}
+p{
+margin:0px;
+padding:0px;
+}
+.schoolDetails{
+width:66%;
+height:2cm;
+margin:0;
+padding:0;
+}
+
+#schooldata table,td{
+border:none;
+margin:0px;
+padding:0px;
+
+}
+.studentData{
+text-decoration:bold;
+font-weight:bold;
+}
+.tableFomat{
+border:1px solid black;
+padding:0;
+}
+#keys table tr td{
+border:1px solid black;
+font-size:13px;
+font-weight:bold;
+margin:0;
+}
+table{
+border-collapse: collapse;
+width:100%;
+}
+th.rotate {
+height: 150px;
+white-space: nowrap;
+}
+
+th.rotate div span{
+    height: 100%;
+}
+
+th.rotate > div {
+transform: 
+    translate(13px, 58px)
+    rotate(-90deg);
+width: 30px;
+}
+th.rotate > div > span {
+border-bottom: 1px solid grey;
+padding: 5px 10px;
+}

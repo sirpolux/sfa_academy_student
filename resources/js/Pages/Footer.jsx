@@ -40,7 +40,7 @@ export default function Footer() {
           <div className="flex items-start mb-3">
             <FaMapMarkerAlt className="text-dark mt-1" />
             <div className="ml-3">
-              <h5 className="text-white font-bold">Address</h5>
+              <h5 className="text-dark font-bold">Address</h5>
               <p>Jos Road, Opp. College of Education Akwanga, Behind Rishamah College, Nasarawa State.</p>
             </div>
           </div>
@@ -71,25 +71,25 @@ export default function Footer() {
         <div>
           <h3 className="text-dark text-xl font-semibold mb-4">Quick Links</h3>
           <div className="flex flex-col space-y-2">
-            <Link href="/" className="text-white hover:text-primary transition">
+            <Link href="/" className="text-dark hover:text-primary transition">
               <FaAngleRight className="inline mr-2" />Home
             </Link>
-            <Link href="/about" className="text-white hover:text-primary transition">
+            <Link href="/about" className="text-dark hover:text-primary transition">
               <FaAngleRight className="inline mr-2" />About Us
             </Link>
-            <Link href="/admission/form" className="text-white hover:text-primary transition">
+            <Link href="/admission/form" className="text-dark hover:text-primary transition">
               <FaAngleRight className="inline mr-2" />Apply Now
             </Link>
-            <Link href="/guest/admission/status" className="text-white hover:text-primary transition">
+            <Link href="/guest/admission/status" className="text-dark hover:text-primary transition">
               <FaAngleRight className="inline mr-2" />Check Admission Status
             </Link>
-            <Link href="/student/result" className="text-white hover:text-primary transition">
+            <Link href="/student/result" className="text-dark hover:text-primary transition">
               <FaAngleRight className="inline mr-2" />Check Result
             </Link>
-            <a href="#" className="text-white hover:text-primary transition">
+            <a href="#" className="text-dark hover:text-primary transition">
               <FaAngleRight className="inline mr-2" />Upcoming Events
             </a>
-            <a href="#" className="text-white hover:text-primary transition">
+            <a href="#" className="text-dark hover:text-primary transition">
               <FaAngleRight className="inline mr-2" />Our Blog
             </a>
           </div>
@@ -111,7 +111,7 @@ export default function Footer() {
               className="w-full mb-3 p-3 rounded bg-white text-black placeholder-gray-500 focus:outline-none"
               required
             />
-            <button type="submit" className="bg-primary w-full py-3 rounded text-white font-bold hover:bg-white hover:text-primary transition">
+            <button type="submit" className="bg-primary w-full py-3 rounded text-dark font-bold hover:bg-white hover:text-primary transition">
               Submit Now
             </button>
           </form>

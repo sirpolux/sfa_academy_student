@@ -24,36 +24,17 @@ export default function NavBar(){
 
 
     const menuItems = [
-        // { label: 'Retreats',
-        //     submenu:[
-        //         { label: 'Retreat', to: '/retreat' },
-        //         { label: 'My Retreat Bookings', to: '/bookings' },
-        //         { label: 'Single Booking', to: '/bookings/single' },
-        //         { label: 'Group Booking', to: '/bookings/group' }
-        //     ]
-        // },
-        { label: 'Home', to: '/' },
-
-        { label: 'About Us', to: '/about-us' },
-        { label: 'Contact Us', to: '/contact-us' },
-        
-        // {
-        //     label: 'Media & News',
-        //     submenu: [
-        //         { label: 'News', to: '/news' },
-        //         // { label: 'News', to: '/news' },
-        //         { label: 'Gallery', to: '/gallery' }
-        //     ]
-        // },
-        // {
-        //     label: 'Bookings',
-        //     submenu: [
-        //         { label: 'Single Booking', to: '/bookings/single' },
-        //         { label: 'Group Booking', to: '/bookings/group' }
-        //     ]
-        // },
-        // { label: 'Book Store', to: 'https://store.materecclesiaemonastery.org/' },
-    ];
+      { label: 'Home', to: '/' },
+      { label: 'About Us', to: '/about-us' },
+      { label: 'Contact Us', to: '/contact-us' },
+      {
+          label: 'Results',
+          submenu: [
+              { label: 'Termly Result', to: '/student/termly/result/index' },
+              { label: 'Annual Result', to: '/student/annual/result/index' }
+          ]
+      }
+  ];
 
     const handleLogout = (e) => {
         e.preventDefault();
@@ -111,22 +92,6 @@ export default function NavBar(){
                                         )}
                                     </>
                                 ) : (
-
-                                    // item.label === 'Book Store' ?
-                                    //     <div className=''>
-                                    //         <a
-                                    //             href={item.to}
-                                    //             target='_blank'
-                                    //             onClick={() => setDrawerOpen(false)}
-                                    //             className="flex items-center gap-2 px-4 py-2 bg-brand-red-dark hover:bg-brand-red-light text-white rounded-full text-sm justify-center"
-                                    //         >
-                                    //             {item.label}
-                                    //             <BookText />
-
-                                    //         </a>
-                                           
-                                    //     </div>
-                                    //     :
                                         <Link
                                             href={item.to}
                                             onClick={() => setDrawerOpen(false)}
@@ -145,7 +110,7 @@ export default function NavBar(){
                 </div>
 
                 <div className="flex items-center gap-3 z-50">
-                    <div className="hidden md:block relative">
+                    {/* <div className="hidden md:block relative">
                         <button
                             onClick={() => toggleDropdown('BookingsMob')}
                             className="px-4 py-2 bg-primary text-white text-sm rounded-full font-medium hover:bg-primary/80 transition flex items-center gap-1"
@@ -172,7 +137,7 @@ export default function NavBar(){
                                 </li>
                             </ul>
                         )}
-                    </div>
+                    </div> */}
 
                     <button onClick={toggleDrawer} className="md:hidden text-gray-800 text-3xl">
                         {drawerOpen ? <CloseIcon size={28} /> : <MenuIcon size={28} />}

@@ -9,6 +9,9 @@ namespace App\Constants;
         const SCH_CONFIG="school_configurations";
         const DYNAMIC_TABLES="dynamic_tables";
         const REG_STU="admitted_students";
+
+
+        const AVAILABLE_SESSION = ["2024_2025"];
         
         const FORMS=array("Science","Commercial","Art",NULL);
 

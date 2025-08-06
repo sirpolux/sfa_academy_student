@@ -1,10 +1,12 @@
 import React from 'react';
 import { Head } from '@inertiajs/react';
 import { motion } from 'framer-motion';
+import GuestLayout from '@/Layouts/GuestLayout';
 
 export default function About() {
   return (
-    <div>
+ <GuestLayout>
+     <div>
       <Head title="About Us" />
 
       {/* Hero Section with Image */}
@@ -34,7 +36,7 @@ export default function About() {
             className="lg:w-1/2"
           >
             <img
-              src="/img/about-school.jpg" // Replace with actual image path
+              src="/img/sch_img.png" // Replace with actual image path
               alt="Solid Foundation Campus"
               className="rounded-xl shadow-lg w-full hover:scale-105 transition-transform duration-300"
             />
@@ -75,5 +77,6 @@ export default function About() {
         </p>
       </motion.section>
     </div>
+ </GuestLayout>
   );
 }

@@ -1,10 +1,12 @@
 import React from 'react';
 import { Head } from '@inertiajs/react';
 import { motion } from 'framer-motion';
+import GuestLayout from '@/Layouts/GuestLayout';
 
 export default function Contact() {
   return (
-    <div>
+    <GuestLayout>
+          <div>
       <Head title="Contact Us" />
 
       {/* Header */}
@@ -75,5 +77,6 @@ export default function Contact() {
         </motion.form>
       </section>
     </div>
+    </GuestLayout>
   );
 }

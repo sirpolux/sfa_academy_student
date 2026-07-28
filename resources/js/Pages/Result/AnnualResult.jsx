@@ -22,12 +22,12 @@ export default function AnnualResult({ resultData }) {
             </div>
 
             {/* School Name Row */}
-            <div className="text-center font-bold text-lg uppercase z-10 relative">
+            <div className="text-center font-bold text-2xl uppercase z-10 relative">
                 Solid Foundation Academy, Akwanga
-                <p className="font-normal text-gray-700 text-sm">
+                <p className="font-normal text-gray-700 text-lg">
                     Daycare, Kindergarten, Nursery, Primary & Secondary
                 </p>
-                <p className="text-sm mt-1">Annual Academic Report</p>
+                <p className="text-lg mt-1">Annual Academic Report</p>
             </div>
 
             {/* Student Info in One Row */}
@@ -37,7 +37,7 @@ export default function AnnualResult({ resultData }) {
                     alt="Student Passport"
                     className="w-16 h-20 object-cover border border-gray-300 rounded-sm"
                 />
-                <table className="text-xs border-collapse w-full ml-2">
+                <table className="text-[0.85rem] border-collapse w-full ml-2">
                     <tbody>
                         <tr>
                             <td className="px-1 py-0.5 font-medium">Name:</td>
@@ -64,7 +64,7 @@ export default function AnnualResult({ resultData }) {
             {/* Annual Summary Row */}
             <div className="border border-gray-300 rounded-md p-2 mt-1 bg-gray-50 z-10 relative">
                 <h2 className="font-bold text-center text-sm mb-1">Annual Summary</h2>
-                <table className="w-full text-xs border border-gray-300">
+                <table className="w-full text-[0.8rem] border border-gray-300">
                     <tbody>
                         <tr>
                             <td className="border px-1 py-0.5">First</td>
@@ -94,7 +94,7 @@ export default function AnnualResult({ resultData }) {
 
             {/* Subject Scores Table */}
             <div className="relative overflow-x-auto mt-1 z-10">
-                <table className="min-w-full border border-gray-300 text-xs">
+                <table className="min-w-full border border-gray-300 text-[0.8rem]">
                     <thead className="bg-gray-100">
                         <tr>
                             <th className="border px-1 py-0.5">S/N</th>
@@ -131,11 +131,11 @@ export default function AnnualResult({ resultData }) {
             {/* Remarks */}
             <div className="grid grid-cols-2 gap-2 mt-1 z-10">
                 <div>
-                    <h3 className="font-bold mb-1 text-xs">Teacher's Remark:</h3>
+                    <h3 className="font-bold mb-1 text-sm">Teacher's Remark:</h3>
                     <div className="border border-gray-300 h-8 p-1 rounded-sm bg-gray-50"></div>
                 </div>
                 <div>
-                    <h3 className="font-bold mb-1 text-xs">Headmaster's Remark:</h3>
+                    <h3 className="font-bold mb-1 text-sm">Headmaster's Remark:</h3>
                     <div className="border border-gray-300 h-8 p-1 rounded-sm bg-gray-50"></div>
                 </div>
             </div>

@@ -19,8 +19,8 @@ export default function TermlyResult({ resultData }) {
             ? subjectHighestScores[0].total_students
             : "-";
 
-    const overallTotal = studentCaEntries.reduce((sum, subj) => sum + subj.total, 0);
-    const average = (overallTotal / studentCaEntries.length).toFixed(2);
+    const overallTotal = studentClassSummary.total;
+    const average = studentClassSummary.average;
 
     // Helper: Get highest/lowest/average for a subject
     const getSubjectStats = (subject) => {

@@ -14,14 +14,20 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                display: ['Georgia', 'serif'],
             },
 
-            colors:{
-                primary:"#2A47FE",
-                secondary:"#6A81FD",
-                tertiary:"#C2CBFF",
-                dark:"#090E1F",
-            }
+            colors: {
+                // Warm & Earthy palette
+                primary: '#2D4A3E',      // deep forest green
+                secondary: '#7C9885',    // sage
+                accent: '#C67B4E',       // terracotta
+                amber: '#E4A853',        // warm highlight
+                cream: '#FAF7F2',        // warm background
+                sand: '#F5EFE6',         // alt warm background
+                dark: '#232D27',         // deep text
+                muted: '#6B6458',        // secondary text
+            },
         },
     },
 

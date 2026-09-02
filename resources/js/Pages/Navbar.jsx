@@ -1,149 +1,157 @@
 import React, { useState } from 'react';
-import { Link, usePage } from '@inertiajs/react';
-import { Menu as MenuIcon, X as CloseIcon, LogOut, UserPlus, ChevronDown, Store, BookText } from 'lucide-react';
+import { Link } from '@inertiajs/react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import logoSmall from '../../../public/img/logo_small.png';
 
+const menuItems = [
+    { label: 'Home', to: '/' },
+    { label: 'About Us', to: '/about-us' },
+    { label: 'Contact Us', to: '/contact-us' },
+    {
+        label: 'Results',
+        submenu: [
+            { label: 'Termly Result', to: '/student/termly/result/index' },
+            { label: 'Annual Result', to: '/student/annual/result/index' },
+        ],
+    },
+];
 
-
-export default function NavBar(){
-    const { auth } = usePage().props;
-    const user = auth?.user;
+export default function NavBar() {
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(null);
+    const [mobileResultsOpen, setMobileResultsOpen] = useState(false);
 
-    const toggleDrawer = () => setDrawerOpen(!drawerOpen);
-    const toggleDropdown = (label) => setDropdownOpen(dropdownOpen === label ? null : label);
+    const toggleDrawer = () => setDrawerOpen((prev) => !prev);
+    const toggleDropdown = (label) =>
+        setDropdownOpen((prev) => (prev === label ? null : label));
 
-
-    const [isBookingOpenDesktop, setIsBookingOpenDesktop] = useState(false);
-    const [isBookingOpenMobile, setIsBookingOpenMobile] = useState(false);
-
-    // Toggle handlers
-    const toggleBookingDesktop = () => setIsBookingOpenDesktop(prev => !prev);
-    const toggleBookingMobile = () => setIsBookingOpenMobile(prev => !prev);
-
-
-    const menuItems = [
-      { label: 'Home', to: '/' },
-      { label: 'About Us', to: '/about-us' },
-      { label: 'Contact Us', to: '/contact-us' },
-      {
-          label: 'Results',
-          submenu: [
-              { label: 'Termly Result', to: '/student/termly/result/index' },
-              { label: 'Annual Result', to: '/student/annual/result/index' }
-          ]
-      }
-  ];
-
-    const handleLogout = (e) => {
-        e.preventDefault();
-        window.axios.post('/logout').then(() => {
-            window.location.reload();
-        });
+    const closeMenu = () => {
+        setDrawerOpen(false);
+        setDropdownOpen(null);
+        setMobileResultsOpen(false);
     };
 
     return (
-        <header className="w-full h-20 flex items-center sticky top-0 bg-white shadow z-50">
-            <nav className="flex justify-between items-center w-full px-4">
-                <div className="flex items-center gap-3">
-                    <img src={logoSmall} alt="Ave Mater Ecclesiae Logo" className="w-10 h-10 object-contain" />
-                    <Link href="/" className="hidden md:inline text-xl font-semibold text-gray-600">
-                        Solid Foundation Academy
-                    </Link>
-                </div>
-
-                <div
-                    className={`fixed inset-0 bg-white pt-24 px-6 md:px-0 md:pt-0 md:static md:flex md:items-center md:justify-center transition-transform duration-300 ${drawerOpen ? 'translate-y-0' : '-translate-y-full md:translate-y-0'
-                        }`}
-                >
-
-                    <div className='block md:hidden px-4 font-semibold text-brand-brown-dark mb-2'>
-                        Mobile Menu
-                        <hr/>
+        <header className="sticky top-0 z-50 border-b border-dark/5 bg-cream/80 backdrop-blur-lg">
+            <nav className="mx-auto flex h-18 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+                {/* Brand */}
+                <Link href="/" className="flex items-center gap-3" onClick={closeMenu}>
+                    <img
+                        src={logoSmall}
+                        alt="Solid Foundation Academy Logo"
+                        className="h-10 w-10 rounded-full object-cover ring-2 ring-primary/20"
+                    />
+                    <div className="hidden flex-col sm:flex">
+                        <span className="font-display text-lg font-bold leading-tight text-primary">
+                            Solid Foundation
+                        </span>
+                        <span className="-mt-1 text-xs tracking-widest text-muted">
+                            ACADEMY, AKWANGA
+                        </span>
                     </div>
-                
-                    <ul className="flex flex-col md:flex-row md:gap-6 gap-4 text-gray-700">
-                        
-                        {menuItems.map((item) => (
-                            <li key={item.label} className="relative">
-                                {item.submenu ? (
-                                    <>
-                                        <button
-                                            onClick={() => toggleDropdown(item.label)}
-                                            className="flex items-center gap-1 px-4 py-2 rounded-full hover:text-primary transition duration-300"
-                                        >
-                                            {item.label} <ChevronDown size={16} />
-                                        </button>
-                                        {dropdownOpen === item.label && (
-                                            <ul className="absolute bg-white shadow rounded mt-2 py-2 w-48 z-50">
-                                                {item.submenu.map((sub) => (
-                                                    <li key={sub.to}>
-                                                        <Link
-                                                            href={sub.to}
-                                                            onClick={() => setDrawerOpen(false)}
-                                                            className="block px-4 py-2 text-sm hover:bg-primary hover:text-brand-red-dark"
-                                                        >
-                                                            {sub.label}
-                                                        </Link>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        )}
-                                    </>
-                                ) : (
-                                        <Link
-                                            href={item.to}
-                                            onClick={() => setDrawerOpen(false)}
-                                            className="block px-4 py-2 rounded-full hover:text-primary transition duration-300"
-                                        >
-                                            {item.label}
-                                        </Link>
+                </Link>
 
-
-                                )}
-                            </li>
-                        ))}
-
-
-                    </ul>
+                {/* Desktop Menu */}
+                <div className="hidden items-center gap-1 md:flex">
+                    {menuItems.map((item) => (
+                        <div key={item.label} className="relative">
+                            {item.submenu ? (
+                                <>
+                                    <button
+                                        onClick={() => toggleDropdown(item.label)}
+                                        className="flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium text-dark transition hover:bg-primary/10 hover:text-primary"
+                                    >
+                                        {item.label}
+                                        <ChevronDown
+                                            size={16}
+                                            className={`transition ${dropdownOpen === item.label ? 'rotate-180' : ''}`}
+                                        />
+                                    </button>
+                                    {dropdownOpen === item.label && (
+                                        <div className="absolute right-0 mt-2 w-48 overflow-hidden rounded-xl border border-dark/5 bg-white py-1 shadow-lg">
+                                            {item.submenu.map((sub) => (
+                                                <Link
+                                                    key={sub.to}
+                                                    href={sub.to}
+                                                    onClick={() => setDropdownOpen(null)}
+                                                    className="block px-4 py-2.5 text-sm font-medium text-dark transition hover:bg-primary/10 hover:text-primary"
+                                                >
+                                                    {sub.label}
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    )}
+                                </>
+                            ) : (
+                                <Link
+                                    href={item.to}
+                                    className="rounded-full px-4 py-2 text-sm font-medium text-dark transition hover:bg-primary/10 hover:text-primary"
+                                >
+                                    {item.label}
+                                </Link>
+                            )}
+                        </div>
+                    ))}
                 </div>
 
-                <div className="flex items-center gap-3 z-50">
-                    {/* <div className="hidden md:block relative">
-                        <button
-                            onClick={() => toggleDropdown('BookingsMob')}
-                            className="px-4 py-2 bg-primary text-white text-sm rounded-full font-medium hover:bg-primary/80 transition flex items-center gap-1"
-                        >
-                            Results <ChevronDown size={16} />
-                        </button>
-                        {dropdownOpen === 'BookingsMob' && (
-                            <ul className="absolute bg-white shadow rounded mt-2 py-2 w-48 right-0 z-50">
-                                <li>
-                                    <Link
-                                        href="/student/termly/result/index"
-                                        className="block px-4 py-2 text-sm hover:bg-primary hover:text-white"
-                                    >
-                                       Termly Result
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link
-                                        href="/student/annual/result/index"
-                                        className="block px-4 py-2 text-sm hover:bg-primary hover:text-white"
-                                    >
-                                        Annual Result
-                                    </Link>
-                                </li>
-                            </ul>
-                        )}
-                    </div> */}
-
-                    <button onClick={toggleDrawer} className="md:hidden text-gray-800 text-3xl">
-                        {drawerOpen ? <CloseIcon size={28} /> : <MenuIcon size={28} />}
-                    </button>
-                </div>
+                {/* Mobile toggle */}
+                <button
+                    onClick={toggleDrawer}
+                    className="rounded-lg p-2 text-dark transition hover:bg-primary/10 md:hidden"
+                    aria-label="Toggle menu"
+                >
+                    {drawerOpen ? <X size={24} /> : <Menu size={24} />}
+                </button>
             </nav>
+
+            {/* Mobile Menu */}
+            {drawerOpen && (
+                <div className="border-t border-dark/5 bg-white px-4 pb-6 pt-2 md:hidden">
+                    <nav className="flex flex-col gap-1">
+                        {menuItems.map((item) =>
+                            item.submenu ? (
+                                <div key={item.label}>
+                                    <button
+                                        onClick={() =>
+                                            setMobileResultsOpen((prev) => !prev)
+                                        }
+                                        className="flex w-full items-center justify-between rounded-xl px-4 py-3 text-left text-base font-medium text-dark transition hover:bg-primary/10"
+                                    >
+                                        {item.label}
+                                        <ChevronDown
+                                            size={18}
+                                            className={`transition ${mobileResultsOpen ? 'rotate-180' : ''}`}
+                                        />
+                                    </button>
+                                    {mobileResultsOpen && (
+                                        <div className="ml-4 flex flex-col border-l-2 border-primary/20 pl-4">
+                                            {item.submenu.map((sub) => (
+                                                <Link
+                                                    key={sub.to}
+                                                    href={sub.to}
+                                                    onClick={closeMenu}
+                                                    className="rounded-lg px-3 py-2.5 text-sm font-medium text-dark transition hover:bg-primary/10 hover:text-primary"
+                                                >
+                                                    {sub.label}
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            ) : (
+                                <Link
+                                    key={item.label}
+                                    href={item.to}
+                                    onClick={closeMenu}
+                                    className="rounded-xl px-4 py-3 text-base font-medium text-dark transition hover:bg-primary/10 hover:text-primary"
+                                >
+                                    {item.label}
+                                </Link>
+                            ),
+                        )}
+                    </nav>
+                </div>
+            )}
         </header>
     );
-};
+}

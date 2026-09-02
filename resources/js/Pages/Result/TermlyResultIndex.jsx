@@ -29,127 +29,137 @@ export default function TermlyResultIndex({ availableClasses, studentList, sessi
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const url = post(route('student.result.fetch'), {
-            onSuccess: () => {
-                reset();
-                // window.open(url, '_blank');
-            },
+        post(route('student.result.fetch'), {
+            onSuccess: () => reset(),
         });
-
     };
 
     return (
         <GuestLayout>
-            <div className="flex flex-col md:flex-row bg-white rounded-lg shadow-lg overflow-hidden max-w-5xl mx-auto mt-10 ">
-                {/* Left section */}
-                <div className="md:w-1/2 bg-gradient-to-br from-blue-600 to-blue-800 text-white p-8 flex flex-col justify-center items-center">
-                    <img src={schoolIllustration} alt="School" className="w-48 mb-6" />
-                    <h1 className="text-3xl font-bold mb-2">Solid Foundation Academy</h1>
-                    <p className="text-center max-w-xs text-blue-100">Empowering learners with excellence and integrity. Check your termly academic result by filling the form beside.</p>
-                </div>
+            <div className="mx-auto mt-10 max-w-5xl overflow-hidden rounded-3xl bg-white shadow-xl ring-1 ring-dark/5">
+                <div className="flex flex-col bg-primary text-white md:flex-row">
+                    {/* Left section */}
+                    <div className="flex flex-col items-center justify-center bg-primary p-8 md:w-1/2">
+                        <img
+                            src={schoolIllustration}
+                            alt="School"
+                            className="mb-6 w-40 rounded-full bg-cream/10 p-2 ring-2 ring-cream/30"
+                        />
+                        <h1 className="font-display text-3xl font-bold">
+                            Solid Foundation Academy
+                        </h1>
+                        <p className="mt-3 max-w-xs text-center text-cream/80">
+                            Empowering learners with excellence and integrity.
+                            Check your termly academic result by filling the
+                            form beside.
+                        </p>
+                    </div>
 
-                {/* Right section: Form */}
-                <div className="md:w-1/2 p-6 md:p-10">
-                    <h2 className="text-2xl font-semibold mb-6 text-center text-gray-800">Check Termly Result</h2>
-                    <form onSubmit={handleSubmit} className="space-y-5">
-                        <div>
+                    {/* Right section: Form */}
+                    <div className="flex-1 bg-cream p-6 md:p-10">
+                        <h2 className="text-center font-display text-2xl font-bold text-dark">
+                            Check Termly Result
+                        </h2>
+                        <form onSubmit={handleSubmit} className="mt-8 space-y-5">
                             <InputError message={errors.fees} className="mt-2" />
-                        </div>
-                        <div>
-                            <InputLabel htmlFor="student_class" value="Student Class" />
-                            <select
-                                id="student_class"
-                                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
-                                value={data.student_class}
-                                onChange={(e) => setData('student_class', e.target.value)}
-                                required
-                            >
-                                <option value="">Select Class</option>
-                                {availableClasses.map((className) => (
-                                    <option key={className} value={className}>{className.replace(/_/g, ' ').toUpperCase()}</option>
-                                ))}
-                            </select>
-                            <InputError message={errors.student_class} className="mt-2" />
-                        </div>
 
-                        <div>
-                            <InputLabel htmlFor="student_id" value="Student Name" />
-                            <select
-                                id="student_id"
-                                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
-                                value={data.student_id}
-                                onChange={(e) => setData('student_id', e.target.value)}
-                                required
-                                disabled={!data.student_class}
-                            >
-                                <option value="">Select Student</option>
-                                {filteredStudents.map((student) => (
-                                    <option key={student.id} value={student.id}>{student.fullname}</option>
-                                ))}
-                            </select>
-                            <InputError message={errors.student_id} className="mt-2" />
-                        </div>
-                        <div>
-                            <InputLabel htmlFor="session" value="Session" />
-                            <select
-                                id="session"
-                                value={data.session}
-                                onChange={(e) => setData('session', e.target.value)}
-                                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
-                                required
-                            >
-                                <option value="" disabled aria-readonly>Select Session</option>
-                                {
-                                    sessions.map((session, index) =>
-                                        <option value={session}>{session}</option>
-                                    )
-                                }
-                            </select>
-                            <InputError message={errors.session} className="mt-2" />
-                        </div>
+                            <div>
+                                <InputLabel htmlFor="student_class" value="Student Class" />
+                                <select
+                                    id="student_class"
+                                    className="input-field"
+                                    value={data.student_class}
+                                    onChange={(e) => setData('student_class', e.target.value)}
+                                    required
+                                >
+                                    <option value="">Select Class</option>
+                                    {availableClasses.map((className) => (
+                                        <option key={className} value={className}>
+                                            {className.replace(/_/g, ' ').toUpperCase()}
+                                        </option>
+                                    ))}
+                                </select>
+                                <InputError message={errors.student_class} className="mt-2" />
+                            </div>
 
-                        <div>
-                            <InputLabel htmlFor="term" value="Term" />
-                            <select
-                                id="term"
-                                value={data.term}
-                                onChange={(e) => setData('term', e.target.value)}
-                                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-300"
-                                required
-                            >
-                                <option value="">Select Term</option>
-                                <option value="first">First</option>
-                                <option value="second">Second</option>
-                                <option value="third">Third</option>
-                            </select>
-                            <InputError message={errors.term} className="mt-2" />
-                        </div>
+                            <div>
+                                <InputLabel htmlFor="student_id" value="Student Name" />
+                                <select
+                                    id="student_id"
+                                    className="input-field"
+                                    value={data.student_id}
+                                    onChange={(e) => setData('student_id', e.target.value)}
+                                    required
+                                    disabled={!data.student_class}
+                                >
+                                    <option value="">Select Student</option>
+                                    {filteredStudents.map((student) => (
+                                        <option key={student.id} value={student.id}>
+                                            {student.fullname}
+                                        </option>
+                                    ))}
+                                </select>
+                                <InputError message={errors.student_id} className="mt-2" />
+                            </div>
 
-                        <div>
-                            <InputLabel htmlFor="pin" value="Result PIN" />
-                            <TextInput
-                                id="pin"
-                                name="pin"
-                                value={data.pin}
-                                onChange={(e) => setData('pin', e.target.value)}
-                                className="mt-1 block w-full"
-                                placeholder="Enter your PIN"
-                                required
-                            />
-                            <InputError message={errors.pin} className="mt-2" />
-                        </div>
+                            <div>
+                                <InputLabel htmlFor="session" value="Session" />
+                                <select
+                                    id="session"
+                                    className="input-field"
+                                    value={data.session}
+                                    onChange={(e) => setData('session', e.target.value)}
+                                    required
+                                >
+                                    <option value="" disabled>Select Session</option>
+                                    {sessions.map((session) => (
+                                        <option key={session} value={session}>{session}</option>
+                                    ))}
+                                </select>
+                                <InputError message={errors.session} className="mt-2" />
+                            </div>
 
-                        <div>
+                            <div>
+                                <InputLabel htmlFor="term" value="Term" />
+                                <select
+                                    id="term"
+                                    className="input-field"
+                                    value={data.term}
+                                    onChange={(e) => setData('term', e.target.value)}
+                                    required
+                                >
+                                    <option value="">Select Term</option>
+                                    <option value="first">First</option>
+                                    <option value="second">Second</option>
+                                    <option value="third">Third</option>
+                                </select>
+                                <InputError message={errors.term} className="mt-2" />
+                            </div>
+
+                            <div>
+                                <InputLabel htmlFor="pin" value="Result PIN" />
+                                <TextInput
+                                    id="pin"
+                                    name="pin"
+                                    value={data.pin}
+                                    onChange={(e) => setData('pin', e.target.value)}
+                                    className="input-field"
+                                    placeholder="Enter your PIN"
+                                    required
+                                />
+                                <InputError message={errors.pin} className="mt-2" />
+                            </div>
+
                             <button
                                 type="submit"
-                                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition duration-300 flex justify-center items-center gap-2"
+                                className="flex w-full items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-dark disabled:opacity-50"
                                 disabled={processing}
                             >
-                                {processing && <LoaderCircle className="animate-spin w-5 h-5" />}
+                                {processing && <LoaderCircle className="h-5 w-5 animate-spin" />}
                                 Fetch Result
                             </button>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </GuestLayout>

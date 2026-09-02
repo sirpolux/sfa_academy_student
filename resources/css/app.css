@@ -1,3 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-cream text-dark antialiased;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-md transition-all duration-300 hover:bg-dark hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary/50;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-primary px-6 py-3 text-sm font-semibold text-primary transition-all duration-300 hover:bg-primary hover:text-white focus:outline-none focus:ring-2 focus:ring-primary/50;
+  }
+
+  .btn-accent {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white shadow-md transition-all duration-300 hover:bg-dark hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-accent/50;
+  }
+
+  .section-label {
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-accent;
+  }
+
+  .card {
+    @apply rounded-2xl bg-white p-6 shadow-sm ring-1 ring-dark/5 transition-all duration-300 hover:shadow-md hover:ring-primary/20;
+  }
+
+  .input-field {
+    @apply mt-1 block w-full rounded-lg border-gray-200 bg-white px-4 py-2.5 text-sm text-dark shadow-sm placeholder-muted/60 focus:border-primary focus:ring-2 focus:ring-primary/30 focus:outline-none;
+  }
+}

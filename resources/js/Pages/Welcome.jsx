@@ -112,7 +112,7 @@ export default function Welcome() {
                             >
                                 <div className="absolute inset-0 -rotate-3 rounded-3xl bg-accent/30" />
                                 <img
-                                    src="/img/sch_img.png"
+                                    src="/img/solid_foundation_academy_akwanga.png"
                                     alt="School Activities"
                                     className="relative w-full rounded-3xl object-cover shadow-2xl ring-4 ring-cream/20"
                                 />

@@ -36,7 +36,7 @@ export default function AnnualResultIndex({ availableClasses, studentList, sessi
 
     return (
         <GuestLayout>
-            <div className="mx-auto mt-10 max-w-5xl overflow-hidden rounded-3xl bg-white shadow-xl ring-1 ring-dark/5">
+            <div className="mx-auto mt-10 mb-10 max-w-5xl overflow-hidden rounded-3xl bg-white shadow-xl ring-1 ring-dark/5">
                 <div className="flex flex-col bg-primary text-white md:flex-row">
                     {/* Left section */}
                     <div className="flex flex-col items-center justify-center bg-primary p-8 md:w-1/2">

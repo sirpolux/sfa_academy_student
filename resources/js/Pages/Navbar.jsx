@@ -33,7 +33,7 @@ export default function NavBar() {
 
     return (
         <header className="sticky top-0 z-50 border-b border-dark/5 bg-cream/80 backdrop-blur-lg">
-            <nav className="mx-auto flex h-18 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+            <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
                 {/* Brand */}
                 <Link href="/" className="flex items-center gap-3" onClick={closeMenu}>
                     <img

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import logoSmall from '../../../public/img/logo_small.png';
 
@@ -20,6 +20,34 @@ export default function NavBar() {
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(null);
     const [mobileResultsOpen, setMobileResultsOpen] = useState(false);
+    const { url } = usePage();
+    const currentUrl = url.split('?')[0];
+
+    // Route-aware active matching so the menu highlights the current page.
+    const isActive = (to) => {
+        // Home should only be active on the exact root path.
+        if (to === '/') {
+            return currentUrl === '/';
+        }
+        // Result links point to the index pages, but the displayed results
+        // live at /student/result/{termly|annual}.
+        if (to === '/student/termly/result/index') {
+            return (
+                currentUrl === '/student/termly/result/index' ||
+                currentUrl === '/student/result/termly'
+            );
+        }
+        if (to === '/student/annual/result/index') {
+            return (
+                currentUrl === '/student/annual/result/index' ||
+                currentUrl === '/student/result/annual'
+            );
+        }
+        return currentUrl === to || currentUrl.startsWith(to + '/');
+    };
+
+    // The "Results" parent shows active on any student result page.
+    const isResultsActive = currentUrl.startsWith('/student/');
 
     const toggleDrawer = () => setDrawerOpen((prev) => !prev);
     const toggleDropdown = (label) =>
@@ -59,12 +87,24 @@ export default function NavBar() {
                                 <>
                                     <button
                                         onClick={() => toggleDropdown(item.label)}
-                                        className="flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium text-dark transition hover:bg-primary/10 hover:text-primary"
+                                        className={`flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium transition ${
+                                            isResultsActive
+                                                ? 'bg-primary text-white shadow-sm'
+                                                : 'text-dark hover:bg-primary/10 hover:text-primary'
+                                        }`}
                                     >
                                         {item.label}
                                         <ChevronDown
                                             size={16}
-                                            className={`transition ${dropdownOpen === item.label ? 'rotate-180' : ''}`}
+                                            className={`transition ${
+                                                dropdownOpen === item.label
+                                                    ? 'rotate-180'
+                                                    : ''
+                                            } ${
+                                                isResultsActive
+                                                    ? 'text-white'
+                                                    : ''
+                                            }`}
                                         />
                                     </button>
                                     {dropdownOpen === item.label && (
@@ -73,8 +113,14 @@ export default function NavBar() {
                                                 <Link
                                                     key={sub.to}
                                                     href={sub.to}
-                                                    onClick={() => setDropdownOpen(null)}
-                                                    className="block px-4 py-2.5 text-sm font-medium text-dark transition hover:bg-primary/10 hover:text-primary"
+                                                    onClick={() =>
+                                                        setDropdownOpen(null)
+                                                    }
+                                                    className={`block border-l-4 px-4 py-2.5 text-sm font-medium transition ${
+                                                        isActive(sub.to)
+                                                            ? 'border-accent bg-primary/10 text-primary'
+                                                            : 'border-transparent text-dark hover:bg-primary/10 hover:text-primary'
+                                                    }`}
                                                 >
                                                     {sub.label}
                                                 </Link>
@@ -85,7 +131,11 @@ export default function NavBar() {
                             ) : (
                                 <Link
                                     href={item.to}
-                                    className="rounded-full px-4 py-2 text-sm font-medium text-dark transition hover:bg-primary/10 hover:text-primary"
+                                    className={`rounded-full px-4 py-2 text-sm font-medium transition ${
+                                        isActive(item.to)
+                                            ? 'bg-primary text-white shadow-sm'
+                                            : 'text-dark hover:bg-primary/10 hover:text-primary'
+                                    }`}
                                 >
                                     {item.label}
                                 </Link>
@@ -115,12 +165,24 @@ export default function NavBar() {
                                         onClick={() =>
                                             setMobileResultsOpen((prev) => !prev)
                                         }
-                                        className="flex w-full items-center justify-between rounded-xl px-4 py-3 text-left text-base font-medium text-dark transition hover:bg-primary/10"
+                                        className={`flex w-full items-center justify-between rounded-xl px-4 py-3 text-left text-base font-medium transition ${
+                                            isResultsActive
+                                                ? 'bg-primary text-white shadow-sm'
+                                                : 'text-dark hover:bg-primary/10'
+                                        }`}
                                     >
                                         {item.label}
                                         <ChevronDown
                                             size={18}
-                                            className={`transition ${mobileResultsOpen ? 'rotate-180' : ''}`}
+                                            className={`transition ${
+                                                mobileResultsOpen
+                                                    ? 'rotate-180'
+                                                    : ''
+                                            } ${
+                                                isResultsActive
+                                                    ? 'text-white'
+                                                    : ''
+                                            }`}
                                         />
                                     </button>
                                     {mobileResultsOpen && (
@@ -130,7 +192,11 @@ export default function NavBar() {
                                                     key={sub.to}
                                                     href={sub.to}
                                                     onClick={closeMenu}
-                                                    className="rounded-lg px-3 py-2.5 text-sm font-medium text-dark transition hover:bg-primary/10 hover:text-primary"
+                                                    className={`rounded-lg px-3 py-2.5 text-sm font-medium transition ${
+                                                        isActive(sub.to)
+                                                            ? 'bg-primary/10 text-primary'
+                                                            : 'text-dark hover:bg-primary/10 hover:text-primary'
+                                                    }`}
                                                 >
                                                     {sub.label}
                                                 </Link>
@@ -143,7 +209,11 @@ export default function NavBar() {
                                     key={item.label}
                                     href={item.to}
                                     onClick={closeMenu}
-                                    className="rounded-xl px-4 py-3 text-base font-medium text-dark transition hover:bg-primary/10 hover:text-primary"
+                                    className={`rounded-xl px-4 py-3 text-base font-medium transition ${
+                                        isActive(item.to)
+                                            ? 'bg-primary text-white shadow-sm'
+                                            : 'text-dark hover:bg-primary/10 hover:text-primary'
+                                    }`}
                                 >
                                     {item.label}
                                 </Link>

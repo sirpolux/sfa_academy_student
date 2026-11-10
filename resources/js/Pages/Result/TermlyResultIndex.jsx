@@ -10,7 +10,7 @@ import schoolIllustration from '../../../../public/img/logo_small.png';
 export default function TermlyResultIndex({ availableClasses, studentList, sessions }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         student_class: '',
-        student_id: '',
+        student_no: '',
         session: '',
         term: '',
         pin: '',
@@ -83,8 +83,17 @@ export default function TermlyResultIndex({ availableClasses, studentList, sessi
                             </div>
 
                             <div>
-                                <InputLabel htmlFor="student_id" value="Student Name" />
-                                <select
+                                <InputLabel htmlFor="student_no" value="Student No" />
+                                <TextInput
+                                    id="student_no"
+                                    name="student_no"
+                                    value={data.student_no}
+                                    onChange={(e) => setData('student_no', e.target.value)}
+                                    className="input-field"
+                                    placeholder="Registration Number"
+                                    required
+                                />
+                                {/* <select
                                     id="student_id"
                                     className="input-field"
                                     value={data.student_id}
@@ -98,8 +107,8 @@ export default function TermlyResultIndex({ availableClasses, studentList, sessi
                                             {student.fullname}
                                         </option>
                                     ))}
-                                </select>
-                                <InputError message={errors.student_id} className="mt-2" />
+                                </select> */}
+                                <InputError message={errors.student_no} className="mt-2" />
                             </div>
 
                             <div>

@@ -74,12 +74,15 @@ class ResultController extends Controller
         $term = $request->term;
         $resultType =  $request->resultType;
         $pin = $request->pin;
-        $student_id = $request->student_id;
+       
 
+        $studentData = Student::where('admission_no', $request->admission_no)->first();
+        $student_id = $studentData->id;
         $pin_term = $resultType=="annual"?"third":$term;
 
         $pin_status = $this->verifyPin($pin_term, $session, $pin, $student_id);
 
+        dd($request->all());
        
         if ($pin_status['status'] == false) {
             if ($resultType == "termly") {
@@ -104,7 +107,7 @@ class ResultController extends Controller
         }
         
  
-        $studentData = Student::where('id',$student_id)->select("id","fullname","admission_no","current_class", "gender","student_house", "dob", "form")->first();
+        // $studentData = Student::where('id',$student_id)->select("id","fullname","admission_no","current_class", "gender","student_house", "dob", "form")->first();
         $schoolConfig = SchoolConfiguration::find(1);
 
         //check if fees has been paid

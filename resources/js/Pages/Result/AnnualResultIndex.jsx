@@ -81,8 +81,22 @@ export default function AnnualResultIndex({ availableClasses, studentList, sessi
                                 </select>
                                 <InputError message={errors.student_class} className="mt-2" />
                             </div>
-
                             <div>
+                                <InputLabel htmlFor="student_no" value="Student No" />
+                                <TextInput
+                                    id="student_no"
+                                    name="student_no"
+                                    value={data.student_no}
+                                    onChange={(e) => setData('student_no', e.target.value)}
+                                    className="input-field"
+                                    placeholder="Registration Number"
+                                    required
+                                />
+                                <InputError message={errors.student_no} className="mt-2" />
+                            </div>
+
+
+                            {/* <div>
                                 <InputLabel htmlFor="student_id" value="Student Name" />
                                 <select
                                     id="student_id"
@@ -100,7 +114,7 @@ export default function AnnualResultIndex({ availableClasses, studentList, sessi
                                     ))}
                                 </select>
                                 <InputError message={errors.student_id} className="mt-2" />
-                            </div>
+                            </div> */}
 
                             <div>
                                 <InputLabel htmlFor="session" value="Session" />

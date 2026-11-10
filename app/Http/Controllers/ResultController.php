@@ -75,14 +75,14 @@ class ResultController extends Controller
         $resultType =  $request->resultType;
         $pin = $request->pin;
        
-
-        $studentData = Student::where('admission_no', $request->admission_no)->first();
+   
+        $studentData = Student::where('admission_no', $request->student_no)->first();
         $student_id = $studentData->id;
         $pin_term = $resultType=="annual"?"third":$term;
 
         $pin_status = $this->verifyPin($pin_term, $session, $pin, $student_id);
 
-        dd($request->all());
+        // dd($studentData);
        
         if ($pin_status['status'] == false) {
             if ($resultType == "termly") {
